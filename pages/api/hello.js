@@ -1,10 +1,5 @@
 export default async function handler(req, res) {
-  // Only GET requests work with this proxy.
-  if (req.method !== 'GET') {
-    return MethodNotAllowed(req, res);
-  }
 
-  req.url = req.url.replaceAll("/_feather", "/_next");
   const url = new URL(req.url, `https://${process.env.SITE}`);
   const data = await fetch(url.toString(), {
     method: req.method,
@@ -12,6 +7,10 @@ export default async function handler(req, res) {
   });
   
   const type = data.headers.get('content-type');
+
+  let text = await data.text();
+  res.status(data.status).send(text);
+  return;
 
   switch (type) {
     case 'text/html; charset=utf-8': {
