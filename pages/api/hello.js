@@ -4,12 +4,13 @@ export default async function handler(req, res) {
     return MethodNotAllowed(req, res);
   }
 
+  req.url = req.url.replaceAll("/_feather", "/_next");
   const url = new URL(req.url, `https://${process.env.SITE}`);
   const data = await fetch(url.toString(), {
     method: req.method,
     headers: req.headers,
   });
-
+  
   const type = data.headers.get('content-type');
 
   switch (type) {
@@ -23,6 +24,8 @@ export default async function handler(req, res) {
       modified = modified.replace('robots', 'lol');
       modified = modified.replace('googlebot', 'hsbbot');
       modified = modified.replace('robots', 'lol');
+      modified = modified.replaceAll("/_next", "/_feather");
+      modified = modified.replaceAll("/_feather/image", "/_next/image");
       modified = modified.replace(process.env.SITE, 'vercel.me');
       modified = modified.replace(process.env.SITE, 'vercel.me');
       modified = modified.replace(process.env.SITE, 'vercel.me');
