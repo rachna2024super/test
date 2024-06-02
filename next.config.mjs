@@ -10,7 +10,13 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['assets.super.so'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.super.so',
+        port: '',
+      },
+    ]
 },
 };
 
