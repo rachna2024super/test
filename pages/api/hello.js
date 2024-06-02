@@ -37,6 +37,7 @@ export default async function handler(req, res) {
       let text = await data.text();
       let modified = text.replace('googlebot', 'hsbbot');
       modified = modified.replace('robots', 'lol');
+      modified = modified.replaceAll("_next", "_feather");
       res.status(data.status).send(modified);
       break;
     }
