@@ -1,6 +1,7 @@
 export default async function handler(req, res) {
-
+ req.url = req.url.replace("/_feather", "/_next");
   const url = new URL(req.url, `https://${process.env.SITE}`);
+  
   const data = await fetch(url.toString(), {
     method: req.method,
     headers: req.headers,
@@ -8,7 +9,11 @@ export default async function handler(req, res) {
   
   const type = data.headers.get('content-type');
 
+
   let text = await data.text();
+    if(type === 'text/html; charset=utf-8'){
+       text = text.replaceAll("/_next", "/_feather");
+  }
   res.status(data.status).send(text);
   return;
 
