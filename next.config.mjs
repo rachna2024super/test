@@ -4,6 +4,14 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: '/api/:path*',
+        destination: '/api/:path*',
+      },
+      {
+        source: '/_next/:path*',
+        destination: '/_next/:path*',
+      },
+      {
         source: '/:path*',
         destination: '/api/hello',
       },
@@ -18,7 +26,7 @@ const nextConfig = {
       },
     ]
 },
-  distDir:"build"
+distDir:"build"
 };
 
 export default nextConfig;
