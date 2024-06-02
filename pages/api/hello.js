@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       modified = modified.replace('googlebot', 'hsbbot');
       modified = modified.replace('robots', 'lol');
       modified = modified.replaceAll("/_next", "/_feather");
-      // modified = modified.replaceAll("/_feather/image", "/_next/image");
+      modified = modified.replaceAll("self.__next_f", 'self._feather_f');
       modified = modified.replace(process.env.SITE, 'vercel.me');
       modified = modified.replace(process.env.SITE, 'vercel.me');
       modified = modified.replace(process.env.SITE, 'vercel.me');
